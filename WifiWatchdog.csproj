@@ -10,6 +10,14 @@
     <SelfContained>true</SelfContained>
     <InvariantGlobalization>true</InvariantGlobalization>
     <IsAotCompatible>true</IsAotCompatible>
+    <Optimize>true</Optimize>
+    <!-- Release Native AOT favors a smaller executable over maximum runtime speed. -->
+    <OptimizationPreference Condition="'$(Configuration)' == 'Release'">Size</OptimizationPreference>
+    <!-- The service does not need a portable/native PDB in the published directory. -->
+    <DebugType Condition="'$(Configuration)' == 'Release'">None</DebugType>
+    <DebugSymbols Condition="'$(Configuration)' == 'Release'">false</DebugSymbols>
+    <!-- Release logs currently record exception messages, not stack traces. -->
+    <StackTraceSupport Condition="'$(Configuration)' == 'Release'">false</StackTraceSupport>
   </PropertyGroup>
   <ItemGroup>
     <None Remove="scripts\Install-Service.ps1" />
